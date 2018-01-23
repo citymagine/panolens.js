@@ -1,0 +1,23 @@
+{
+  "name": "panolens.js",
+  "description": "Javascript panorama viewer",
+  "main": "build/panolens.js",
+  "authors": [
+    "Ray Chen"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "panorama",
+    "viewer",
+    "javascript",
+    "html5",
+    "3d"
+  ],
+  "homepage": "https://github.com/Citymagine/panolens.js",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
