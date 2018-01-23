@@ -1,7 +1,7 @@
 {
   "name": "panolens.js",
   "description": "Javascript panorama viewer",
-  "main": "build/panolens.js",
+  "main": ["build/panolens.js", "build/panolens-offline.js"],
   "authors": [
     "Ray Chen"
   ],
