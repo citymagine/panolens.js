@@ -4,7 +4,7 @@
 	(global = global || self, factory(global.PANOLENS = {}, global.THREE));
 }(this, function (exports, THREE) { 'use strict';
 
-	const version="0.11.0";const dependencies={three:"^0.105.2"};
+	const version="0.11.1";const dependencies={three:"^0.105.2"};
 
 	/**
 	 * REVISION
@@ -7546,7 +7546,7 @@
 	    // Camera Controls
 	    this.OrbitControls = new OrbitControls( this.camera, this.container );
 	    this.OrbitControls.id = 'orbit';
-	    this.OrbitControls.minDistance = 1;
+	    this.OrbitControls.minDistance = 0; // MARC PATCH
 	    this.OrbitControls.noPan = true;
 	    this.OrbitControls.autoRotate = this.options.autoRotate;
 	    this.OrbitControls.autoRotateSpeed = this.options.autoRotateSpeed;
@@ -7554,7 +7554,7 @@
 	    this.DeviceOrientationControls = new DeviceOrientationControls( this.camera, this.container );
 	    this.DeviceOrientationControls.id = 'device-orientation';
 	    this.DeviceOrientationControls.enabled = false;
-	    this.camera.position.z = 1;
+	    this.camera.position.z = 0.001; // MARC PATCH
 
 	    // Register change event if passiveRenering
 	    if ( this.options.passiveRendering ) {
@@ -7755,7 +7755,7 @@
 
 	            // Assign and enter panorama
 	            (this.panorama = pano).onEnter();
-				
+
 	        }
 
 	    },
@@ -7827,12 +7827,12 @@
 	                item = ControlMenuItem.subMenu.children[ 2 ];
 
 	                break;
-						
+
 	            default:
 
 	                item = ControlMenuItem.subMenu.children[ 1 ];
 
-	                break;	
+	                break;
 
 	            }
 
@@ -7854,7 +7854,7 @@
 	            case MODES.STEREO:
 
 	                item = ModeMenuItem.subMenu.children[ 3 ];
-						
+
 	                break;
 
 	            default:
@@ -7898,7 +7898,8 @@
 
 	            this.effect = this.StereoEffect;
 	            this.enableReticleControl();
-					
+
+
 	            break;
 
 	        default:
@@ -8176,7 +8177,7 @@
 
 	    /**
 	     * Update video play button
-	     * @param {boolean} paused 
+	     * @param {boolean} paused
 	     * @memberOf Viewer
 	     * @instance
 	     */
@@ -8214,7 +8215,7 @@
 	                    this.hideVideoWidget.call( this );
 
 	                }
-					
+
 	            }.bind( this ) );
 
 	        }
@@ -8367,7 +8368,7 @@
 	        case CONTROLS.ORBIT:
 
 	            this.camera.position.copy( this.panorama.position );
-	            this.camera.position.z += 1;
+	            this.camera.position.z += 0.001; // MARC PATCH
 
 	            break;
 
@@ -8459,7 +8460,7 @@
 	    },
 
 	    /**
-	     * Add reticle 
+	     * Add reticle
 	     * @memberOf Viewer
 	     * @instance
 	     */
@@ -8610,12 +8611,12 @@
 
 	            const isAndroid = /(android)/i.test(window.navigator.userAgent);
 
-	            const adjustWidth = isAndroid 
-	                ? Math.min(document.documentElement.clientWidth, window.innerWidth || 0) 
+	            const adjustWidth = isAndroid
+	                ? Math.min(document.documentElement.clientWidth, window.innerWidth || 0)
 	                : Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
-	            const adjustHeight = isAndroid 
-	                ? Math.min(document.documentElement.clientHeight, window.innerHeight || 0) 
+	            const adjustHeight = isAndroid
+	                ? Math.min(document.documentElement.clientHeight, window.innerHeight || 0)
 	                : Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
 	            width = expand ? adjustWidth : this.container.clientWidth;
@@ -8716,7 +8717,7 @@
 
 	    /**
 	     * On mouse down
-	     * @param {MouseEvent} event 
+	     * @param {MouseEvent} event
 	     * @memberOf Viewer
 	     * @instance
 	     */
@@ -8733,7 +8734,7 @@
 
 	    /**
 	     * On mouse move
-	     * @param {MouseEvent} event 
+	     * @param {MouseEvent} event
 	     * @memberOf Viewer
 	     * @instance
 	     */
@@ -8747,7 +8748,7 @@
 
 	    /**
 	     * On mouse up
-	     * @param {MouseEvent} event 
+	     * @param {MouseEvent} event
 	     * @memberOf Viewer
 	     * @instance
 	     */
@@ -8757,15 +8758,15 @@
 
 	        this.userMouse.type = 'mouseup';
 
-	        const type = ( this.userMouse.x >= event.clientX - this.options.clickTolerance 
+	        const type = ( this.userMouse.x >= event.clientX - this.options.clickTolerance
 					&& this.userMouse.x <= event.clientX + this.options.clickTolerance
 					&& this.userMouse.y >= event.clientY - this.options.clickTolerance
-					&& this.userMouse.y <= event.clientY + this.options.clickTolerance ) 
-					||  ( event.changedTouches 
+					&& this.userMouse.y <= event.clientY + this.options.clickTolerance )
+					||  ( event.changedTouches
 					&& this.userMouse.x >= event.changedTouches[0].clientX - this.options.clickTolerance
-					&& this.userMouse.x <= event.changedTouches[0].clientX + this.options.clickTolerance 
+					&& this.userMouse.x <= event.changedTouches[0].clientX + this.options.clickTolerance
 					&& this.userMouse.y >= event.changedTouches[0].clientY - this.options.clickTolerance
-					&& this.userMouse.y <= event.changedTouches[0].clientY + this.options.clickTolerance ) 
+					&& this.userMouse.y <= event.changedTouches[0].clientY + this.options.clickTolerance )
 	            ? 'click' : undefined;
 
 	        // Event should happen on canvas
@@ -8776,7 +8777,7 @@
 	        if ( event.changedTouches && event.changedTouches.length === 1 ) {
 
 	            onTarget = this.onTap( { clientX: event.changedTouches[0].clientX, clientY: event.changedTouches[0].clientY }, type );
-			
+
 	        } else {
 
 	            onTarget = this.onTap( event, type );
@@ -8785,9 +8786,9 @@
 
 	        this.userMouse.type = 'none';
 
-	        if ( onTarget ) { 
+	        if ( onTarget ) {
 
-	            return; 
+	            return;
 
 	        }
 
@@ -8813,8 +8814,8 @@
 
 	    /**
 	     * On tap eveny frame
-	     * @param {MouseEvent} event 
-	     * @param {string} type 
+	     * @param {MouseEvent} event
+	     * @param {string} type
 	     * @memberOf Viewer
 	     * @instance
 	     */
@@ -8828,17 +8829,17 @@
 
 	        this.raycaster.setFromCamera( this.raycasterPoint, this.camera );
 
-	        // Return if no panorama 
-	        if ( !this.panorama ) { 
+	        // Return if no panorama
+	        if ( !this.panorama ) {
 
-	            return; 
+	            return;
 
 	        }
 
 	        // output infospot information
-	        if ( event.type !== 'mousedown' && this.touchSupported || this.OUTPUT_INFOSPOT ) { 
+	        if ( event.type !== 'mousedown' && this.touchSupported || this.OUTPUT_INFOSPOT ) {
 
-	            this.outputPosition(); 
+	            this.outputPosition();
 
 	        }
 
@@ -8994,13 +8995,13 @@
 	        if ( intersect && intersect instanceof Infospot ) {
 
 	            this.infospot = intersect;
-				
+
 	            if ( type === 'click' ) {
 
 	                return true;
 
 	            }
-				
+
 
 	        } else if ( this.infospot ) {
 
@@ -9021,13 +9022,13 @@
 
 	            }
 
-	        }		
+	        }
 
 	    },
 
 	    /**
 	     * Get converted intersect
-	     * @param {array} intersects 
+	     * @param {array} intersects
 	     * @memberOf Viewer
 	     * @instance
 	     */
@@ -9099,7 +9100,7 @@
 
 	    /**
 	     * On key down
-	     * @param {KeyboardEvent} event 
+	     * @param {KeyboardEvent} event
 	     * @memberOf Viewer
 	     * @instance
 	     */
@@ -9115,7 +9116,7 @@
 
 	    /**
 	     * On key up
-	     * @param {KeyboardEvent} event 
+	     * @param {KeyboardEvent} event
 	     * @memberOf Viewer
 	     * @instance
 	     */
@@ -9139,10 +9140,10 @@
 	        this.control.update();
 
 	        this.scene.traverse( function( child ){
-	            if ( child instanceof Infospot 
-					&& child.element 
-					&& ( this.hoverObject === child 
-						|| child.element.style.display !== 'none' 
+	            if ( child instanceof Infospot
+					&& child.element
+					&& ( this.hoverObject === child
+						|| child.element.style.display !== 'none'
 						|| (child.element.left && child.element.left.style.display !== 'none')
 						|| (child.element.right && child.element.right.style.display !== 'none') ) ) {
 	                if ( this.checkSpriteInViewport( child ) ) {
@@ -9151,7 +9152,7 @@
 	                } else {
 	                    child.onDismiss();
 	                }
-					
+
 	            }
 	        }.bind( this ) );
 
@@ -9170,7 +9171,7 @@
 	            this.renderer.clear();
 	            this.effect.render( this.scene, this.camera );
 	            this.effect.render( this.sceneReticle, this.camera );
-				
+
 
 	        } else {
 
@@ -9374,7 +9375,7 @@
 
 	        this.dispose();
 	        this.render();
-	        window.cancelAnimationFrame( this.requestAnimationId );		
+	        window.cancelAnimationFrame( this.requestAnimationId );
 
 	    },
 
@@ -9494,7 +9495,7 @@
 	     */
 	    appendControlItem: function ( option ) {
 
-	        const item = this.widget.createCustomItem( option );		
+	        const item = this.widget.createCustomItem( option );
 
 	        if ( option.group === 'video' ) {
 
