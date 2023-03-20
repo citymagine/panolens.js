@@ -137,5 +137,8 @@
       "README.md"
     ],
     "directories": {}
-  }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
 }
