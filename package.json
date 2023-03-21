@@ -1,6 +1,6 @@
 {
   "name": "citypanolens",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "description": "Javascript panorama viewer",
   "main": "build/panolens.js",
   "jsnext:main": "build/panolens.module.js",
@@ -137,8 +137,5 @@
       "README.md"
     ],
     "directories": {}
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }
