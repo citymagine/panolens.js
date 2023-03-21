@@ -1,5 +1,5 @@
 {
-  "name": "citypanolens",
+  "name": "@mycitymagine/panolens",
   "version": "0.11.2",
   "description": "Javascript panorama viewer",
   "main": "build/panolens.js",
